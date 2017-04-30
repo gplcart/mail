@@ -1,0 +1,20 @@
+{
+    "name": "Mail",
+    "version": "1.0.0-dev",
+    "description": "Provides an alternative way to send store emails using SMTP protocol",
+    "author": "Iurii Makukh ",
+    "core": "1.x",
+    "license": "GPL-3.0+",
+    "configure": "admin/module/settings/mail",
+    "settings": {
+        "status": false,
+        "auth": true,
+        "secure": "tls",
+        "host": [
+            "smtp.gmail.com"
+        ],
+        "user": "",
+        "password": "",
+        "port": 587
+    }
+}
