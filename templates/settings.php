@@ -65,7 +65,7 @@
       <div class="form-group required<?php echo $this->error('host', ' has-error'); ?>">
         <label class="col-md-2 control-label"><?php echo $this->text('SMTP hosts'); ?></label>
         <div class="col-md-4">
-          <textarea name="settings[host]" class="form-control"><?php echo $this->escape($settings['host']); ?></textarea>
+          <textarea name="settings[host]" class="form-control"><?php echo $this->e($settings['host']); ?></textarea>
           <div class="help-block">
             <?php echo $this->error('host'); ?>
             <div class="text-muted">
@@ -77,7 +77,7 @@
       <div class="form-group required<?php echo $this->error('user', ' has-error'); ?>">
         <label class="col-md-2 control-label"><?php echo $this->text('SMTP user'); ?></label>
         <div class="col-md-4">
-          <input name="settings[user]" class="form-control" value="<?php echo $this->escape($settings['user']); ?>">
+          <input name="settings[user]" class="form-control" value="<?php echo $this->e($settings['user']); ?>">
           <div class="help-block">
             <?php echo $this->error('user'); ?>
             <div class="text-muted">
@@ -89,7 +89,7 @@
       <div class="form-group required<?php echo $this->error('password', ' has-error'); ?>">
         <label class="col-md-2 control-label"><?php echo $this->text('SMTP password'); ?></label>
         <div class="col-md-4">
-          <input name="settings[password]" type="password" class="form-control" autocomplete="new-password" value="<?php echo $this->escape($settings['password']); ?>">
+          <input name="settings[password]" type="password" class="form-control" autocomplete="new-password" value="<?php echo $this->e($settings['password']); ?>">
           <div class="help-block">
             <?php echo $this->error('password'); ?>
             <div class="text-muted">
@@ -101,7 +101,7 @@
       <div class="form-group required<?php echo $this->error('port', ' has-error'); ?>">
         <label class="col-md-2 control-label"><?php echo $this->text('SMTP port'); ?></label>
         <div class="col-md-4">
-          <input name="settings[port]" class="form-control" value="<?php echo $this->escape($settings['port']); ?>">
+          <input name="settings[port]" class="form-control" value="<?php echo $this->e($settings['port']); ?>">
           <div class="help-block">
             <?php echo $this->error('port'); ?>
             <div class="text-muted">
