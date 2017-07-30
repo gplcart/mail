@@ -9,8 +9,7 @@
 
 namespace gplcart\modules\mail;
 
-use gplcart\core\Module,
-    gplcart\core\Library;
+use gplcart\core\Module;
 
 /**
  * Main class for Mail module
@@ -19,25 +18,11 @@ class Mail extends Module
 {
 
     /**
-     * Library class instance
-     * @var \gplcart\core\Library $library
+     * Constructor
      */
-    protected $library;
-
-    /**
-     * PHPMailer class instance
-     * @var \PHPMailer $mailer
-     */
-    protected $mailer;
-
-    /**
-     * @param Library $library
-     */
-    public function __construct(Library $library)
+    public function __construct()
     {
         parent::__construct();
-
-        $this->library = $library;
     }
 
     /**
@@ -102,16 +87,16 @@ class Mail extends Module
     }
 
     /**
-     * Set PHPMailer instance
+     * Returns PHPMailer instance
      * @return \PHPMailer
      * @throws \InvalidArgumentException
      */
-    protected function setMailerInstance()
+    protected function getMailerInstance()
     {
-        $this->library->load('phpmailer');
+        $this->getLibrary()->load('phpmailer');
 
         if (class_exists('PHPMailer')) {
-            return $this->mailer = new \PHPMailer;
+            return new \PHPMailer;
         }
 
         throw new \InvalidArgumentException('Class PHPMailer not found');
@@ -129,46 +114,46 @@ class Mail extends Module
     public function send($to, $subject, $message, $options, $settings)
     {
         try {
-            $this->setMailerInstance();
+            $mailer = $this->getMailerInstance();
         } catch (\InvalidArgumentException $ex) {
             return $ex->getMessage();
         }
 
-        $this->mailer->isSMTP();
-        $this->mailer->isHTML(!empty($options['html']));
+        $mailer->isSMTP();
+        $mailer->isHTML(!empty($options['html']));
 
-        $this->mailer->Body = $message;
-        $this->mailer->Subject = $subject;
+        $mailer->Body = $message;
+        $mailer->Subject = $subject;
 
         if (!empty($options['html'])) {
-            $this->mailer->AltBody = strip_tags($message);
+            $mailer->AltBody = strip_tags($message);
         }
 
-        $this->mailer->Port = $settings['port'];
-        $this->mailer->setFrom($options['from']);
-        $this->mailer->Username = $settings['user'];
-        $this->mailer->Password = $settings['password'];
-        $this->mailer->SMTPSecure = $settings['secure'];
-        $this->mailer->SMTPAuth = !empty($settings['auth']);
-        $this->mailer->Host = implode(';', $settings['host']);
+        $mailer->Port = $settings['port'];
+        $mailer->setFrom($options['from']);
+        $mailer->Username = $settings['user'];
+        $mailer->Password = $settings['password'];
+        $mailer->SMTPSecure = $settings['secure'];
+        $mailer->SMTPAuth = !empty($settings['auth']);
+        $mailer->Host = implode(';', $settings['host']);
 
         foreach ($to as $address) {
             settype($address, 'array');
-            call_user_func_array(array($this->mailer, 'addAddress'), $address);
+            call_user_func_array(array($mailer, 'addAddress'), $address);
         }
 
         if (!empty($options['attachment'])) {
             foreach ($options['attachment'] as $attachment) {
                 settype($attachment, 'array');
-                call_user_func_array(array($this->mailer, 'addAttachment'), $attachment);
+                call_user_func_array(array($mailer, 'addAttachment'), $attachment);
             }
         }
 
-        if ($this->mailer->send()) {
+        if ($mailer->send()) {
             return true;
         }
 
-        return (string) $this->mailer->ErrorInfo;
+        return (string) $mailer->ErrorInfo;
     }
 
     /**
@@ -176,7 +161,7 @@ class Mail extends Module
      */
     public function hookModuleEnableAfter()
     {
-        $this->library->clearCache();
+        $this->getLibrary()->clearCache();
     }
 
     /**
@@ -184,7 +169,7 @@ class Mail extends Module
      */
     public function hookModuleDisableAfter()
     {
-        $this->library->clearCache();
+        $this->getLibrary()->clearCache();
     }
 
     /**
@@ -192,7 +177,7 @@ class Mail extends Module
      */
     public function hookModuleInstallAfter()
     {
-        $this->library->clearCache();
+        $this->getLibrary()->clearCache();
     }
 
     /**
@@ -200,7 +185,7 @@ class Mail extends Module
      */
     public function hookModuleUninstallAfter()
     {
-        $this->library->clearCache();
+        $this->getLibrary()->clearCache();
     }
 
 }
