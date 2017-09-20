@@ -32,8 +32,8 @@ class Mail extends Module
     public function hookLibraryList(array &$libraries)
     {
         $libraries['phpmailer'] = array(
-            'name' => 'PHP Mail',
-            'description' => 'The classic email sending library for PHP',
+            'name' => /* @text */'PHP Mail',
+            'description' => /* @text */'The classic email sending library for PHP',
             'url' => 'https://github.com/PHPMailer/PHPMailer',
             'download' => 'https://github.com/PHPMailer/PHPMailer/archive/v5.2.23.zip',
             'type' => 'php',

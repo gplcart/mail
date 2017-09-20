@@ -79,7 +79,7 @@
       <div class="help-block">
         <?php echo $this->error('user'); ?>
         <div class="text-muted">
-          <?php echo $this->text('A username to be used for authentication on the SMTP server'); ?>
+          <?php echo $this->text('Username to be used for authentication on the SMTP server'); ?>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
       <div class="help-block">
         <?php echo $this->error('password'); ?>
         <div class="text-muted">
-          <?php echo $this->text('A password to be used for authentication on the SMTP server'); ?>
+          <?php echo $this->text('Password to be used for authentication on the SMTP server'); ?>
         </div>
       </div>
     </div>

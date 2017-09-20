@@ -1,7 +1,7 @@
 {
     "name": "Mail",
     "version": "1.0.0-dev",
-    "description": "Provides an alternative way to send store emails using SMTP protocol",
+    "description": "Provides a better way to send store emails. Based on the PHPMailer library",
     "author": "Iurii Makukh ",
     "core": "1.x",
     "license": "GPL-3.0+",
