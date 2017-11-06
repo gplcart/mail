@@ -42,7 +42,7 @@ class Settings extends BackendController
         $this->setTitleEditSettings();
         $this->setBreadcrumbEditSettings();
 
-        $this->setData('settings', $this->config->module('mail'));
+        $this->setData('settings', $this->config->getFromModule('mail'));
 
         $this->submitSettings();
         $this->setDataEditSettings();

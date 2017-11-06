@@ -9,7 +9,8 @@
 
 namespace gplcart\modules\mail;
 
-use gplcart\core\Module;
+use gplcart\core\Module,
+    gplcart\core\Config;
 
 /**
  * Main class for Mail module
@@ -18,11 +19,11 @@ class Mail extends Module
 {
 
     /**
-     * Constructor
+     * @param Config $config
      */
-    public function __construct()
+    public function __construct(Config $config)
     {
-        parent::__construct();
+        parent::__construct($config);
     }
 
     /**
@@ -73,7 +74,7 @@ class Mail extends Module
      */
     public function hookMailSend($to, $subject, $message, $options, &$result)
     {
-        $settings = $this->config->module('mail');
+        $settings = $this->config->getFromModule('mail');
 
         // Check if the module enabled AND result is null, i.e not caught by another module
         if (!empty($settings['status']) && $result === null) {
