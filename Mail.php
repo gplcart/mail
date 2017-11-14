@@ -74,17 +74,39 @@ class Mail extends Module
      */
     public function hookMailSend($to, $subject, $message, $options, &$result)
     {
-        $settings = $this->config->getFromModule('mail');
+        $this->setMailer($to, $subject, $message, $options, $result);
+    }
 
-        // Check if the module enabled AND result is null, i.e not caught by another module
-        if (!empty($settings['status']) && $result === null) {
-            $sent = $this->send($to, $subject, $message, $options, $settings);
-            if ($sent === true) {
-                // On success override $result argument to mark the massage was sent
-                // Another modules implementing this hook won't send this message again
-                $result = true;
-            }
-        }
+    /**
+     * Implements hook "module.enable.after"
+     */
+    public function hookModuleEnableAfter()
+    {
+        $this->getLibrary()->clearCache();
+    }
+
+    /**
+     * Implements hook "module.disable.after"
+     */
+    public function hookModuleDisableAfter()
+    {
+        $this->getLibrary()->clearCache();
+    }
+
+    /**
+     * Implements hook "module.install.after"
+     */
+    public function hookModuleInstallAfter()
+    {
+        $this->getLibrary()->clearCache();
+    }
+
+    /**
+     * Implements hook "module.uninstall.after"
+     */
+    public function hookModuleUninstallAfter()
+    {
+        $this->getLibrary()->clearCache();
     }
 
     /**
@@ -92,7 +114,7 @@ class Mail extends Module
      * @return \PHPMailer
      * @throws \InvalidArgumentException
      */
-    protected function getMailerInstance()
+    public function getMailerInstance()
     {
         $this->getLibrary()->load('phpmailer');
 
@@ -158,35 +180,21 @@ class Mail extends Module
     }
 
     /**
-     * Implements hook "module.enable.after"
+     * @param array $to
+     * @param string $subject
+     * @param string $message
+     * @param array $options
+     * @param mixed $result
      */
-    public function hookModuleEnableAfter()
+    protected function setMailer($to, $subject, $message, $options, &$result)
     {
-        $this->getLibrary()->clearCache();
-    }
-
-    /**
-     * Implements hook "module.disable.after"
-     */
-    public function hookModuleDisableAfter()
-    {
-        $this->getLibrary()->clearCache();
-    }
-
-    /**
-     * Implements hook "module.install.after"
-     */
-    public function hookModuleInstallAfter()
-    {
-        $this->getLibrary()->clearCache();
-    }
-
-    /**
-     * Implements hook "module.uninstall.after"
-     */
-    public function hookModuleUninstallAfter()
-    {
-        $this->getLibrary()->clearCache();
+        $settings = $this->config->getFromModule('mail');
+        if (!empty($settings['status']) && $result === null) {
+            $sent = $this->send($to, $subject, $message, $options, $settings);
+            if ($sent === true) {
+                $result = true;
+            }
+        }
     }
 
 }
