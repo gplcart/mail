@@ -10,20 +10,34 @@
 namespace gplcart\modules\mail;
 
 use gplcart\core\Module,
-    gplcart\core\Config;
+    gplcart\core\Library;
 
 /**
  * Main class for Mail module
  */
-class Mail extends Module
+class Mail
 {
 
     /**
-     * @param Config $config
+     * Module class instance
+     * @var \gplcart\core\Module $module
      */
-    public function __construct(Config $config)
+    protected $module;
+
+    /**
+     * Library class instance
+     * @var \gplcart\core\Library $library
+     */
+    protected $library;
+
+    /**
+     * @param Module $module
+     * @param Library $library
+     */
+    public function __construct(Module $module, Library $library)
     {
-        parent::__construct($config);
+        $this->module = $module;
+        $this->library = $library;
     }
 
     /**
@@ -82,7 +96,7 @@ class Mail extends Module
      */
     public function hookModuleEnableAfter()
     {
-        $this->getLibrary()->clearCache();
+        $this->library->clearCache();
     }
 
     /**
@@ -90,7 +104,7 @@ class Mail extends Module
      */
     public function hookModuleDisableAfter()
     {
-        $this->getLibrary()->clearCache();
+        $this->library->clearCache();
     }
 
     /**
@@ -98,7 +112,7 @@ class Mail extends Module
      */
     public function hookModuleInstallAfter()
     {
-        $this->getLibrary()->clearCache();
+        $this->library->clearCache();
     }
 
     /**
@@ -106,23 +120,7 @@ class Mail extends Module
      */
     public function hookModuleUninstallAfter()
     {
-        $this->getLibrary()->clearCache();
-    }
-
-    /**
-     * Returns PHPMailer instance
-     * @return \PHPMailer
-     * @throws \InvalidArgumentException
-     */
-    public function getMailerInstance()
-    {
-        $this->getLibrary()->load('phpmailer');
-
-        if (class_exists('PHPMailer')) {
-            return new \PHPMailer;
-        }
-
-        throw new \InvalidArgumentException('Class PHPMailer not found');
+        $this->library->clearCache();
     }
 
     /**
@@ -137,7 +135,7 @@ class Mail extends Module
     public function send($to, $subject, $message, $options, $settings)
     {
         try {
-            $mailer = $this->getMailerInstance();
+            $mailer = $this->getMailer();
         } catch (\InvalidArgumentException $ex) {
             return $ex->getMessage();
         }
@@ -180,6 +178,22 @@ class Mail extends Module
     }
 
     /**
+     * Returns PHPMailer instance
+     * @return \PHPMailer
+     * @throws \InvalidArgumentException
+     */
+    public function getMailer()
+    {
+        $this->library->load('phpmailer');
+
+        if (class_exists('PHPMailer')) {
+            return new \PHPMailer;
+        }
+
+        throw new \InvalidArgumentException('Class PHPMailer not found');
+    }
+
+    /**
      * @param array $to
      * @param string $subject
      * @param string $message
@@ -188,7 +202,8 @@ class Mail extends Module
      */
     protected function setMailer($to, $subject, $message, $options, &$result)
     {
-        $settings = $this->config->getFromModule('mail');
+        $settings = $this->module->getSettings('mail');
+
         if (!empty($settings['status']) && $result === null) {
             $sent = $this->send($to, $subject, $message, $options, $settings);
             if ($sent === true) {

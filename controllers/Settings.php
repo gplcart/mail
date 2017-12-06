@@ -9,7 +9,6 @@
 
 namespace gplcart\modules\mail\controllers;
 
-use gplcart\core\models\Module as ModuleModel;
 use gplcart\core\controllers\backend\Controller as BackendController;
 
 /**
@@ -19,19 +18,11 @@ class Settings extends BackendController
 {
 
     /**
-     * Module model instance
-     * @var \gplcart\core\models\Module $module
+     * Constructor
      */
-    protected $module;
-
-    /**
-     * @param ModuleModel $module
-     */
-    public function __construct(ModuleModel $module)
+    public function __construct()
     {
         parent::__construct();
-
-        $this->module = $module;
     }
 
     /**
@@ -42,7 +33,7 @@ class Settings extends BackendController
         $this->setTitleEditSettings();
         $this->setBreadcrumbEditSettings();
 
-        $this->setData('settings', $this->config->getFromModule('mail'));
+        $this->setData('settings', $this->module->getSettings('mail'));
 
         $this->submitSettings();
         $this->setDataEditSettings();
@@ -55,6 +46,7 @@ class Settings extends BackendController
     protected function setDataEditSettings()
     {
         $smtp_host = $this->getData('settings.host');
+
         if (is_array($smtp_host)) {
             $this->setData('settings.host', implode("\n", (array) $smtp_host));
         }
@@ -65,8 +57,7 @@ class Settings extends BackendController
      */
     protected function setTitleEditSettings()
     {
-        $vars = array('%name' => $this->text('Mail'));
-        $title = $this->text('Edit %name settings', $vars);
+        $title = $this->text('Edit %name settings', array('%name' => $this->text('Mail')));
         $this->setTitle($title);
     }
 
