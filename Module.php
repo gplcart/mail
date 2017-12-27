@@ -9,13 +9,13 @@
 
 namespace gplcart\modules\mail;
 
-use gplcart\core\Module,
-    gplcart\core\Library;
+use gplcart\core\Library,
+    gplcart\core\Module as CoreModule;
 
 /**
  * Main class for Mail module
  */
-class Mail
+class Module
 {
 
     /**
@@ -31,10 +31,10 @@ class Mail
     protected $library;
 
     /**
-     * @param Module $module
+     * @param CoreModule $module
      * @param Library $library
      */
-    public function __construct(Module $module, Library $library)
+    public function __construct(CoreModule $module, Library $library)
     {
         $this->module = $module;
         $this->library = $library;
