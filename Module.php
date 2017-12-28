@@ -9,8 +9,10 @@
 
 namespace gplcart\modules\mail;
 
+use Exception;
 use gplcart\core\Library,
     gplcart\core\Module as CoreModule;
+use gplcart\core\exceptions\Dependency as DependencyException;
 
 /**
  * Main class for Mail module
@@ -136,7 +138,7 @@ class Module
     {
         try {
             $mailer = $this->getMailer();
-        } catch (\InvalidArgumentException $ex) {
+        } catch (Exception $ex) {
             return $ex->getMessage();
         }
 
@@ -180,7 +182,7 @@ class Module
     /**
      * Returns PHPMailer instance
      * @return \PHPMailer
-     * @throws \InvalidArgumentException
+     * @throws DependencyException
      */
     public function getMailer()
     {
@@ -190,7 +192,7 @@ class Module
             return new \PHPMailer;
         }
 
-        throw new \InvalidArgumentException('Class PHPMailer not found');
+        throw new DependencyException('Class \PHPMailer not found');
     }
 
     /**
