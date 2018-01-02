@@ -11,13 +11,13 @@ namespace gplcart\modules\mail;
 
 use Exception;
 use gplcart\core\Library,
-    gplcart\core\Module as CoreModule;
+    gplcart\core\Module;
 use gplcart\core\exceptions\Dependency as DependencyException;
 
 /**
  * Main class for Mail module
  */
-class Module
+class Main
 {
 
     /**
@@ -33,10 +33,10 @@ class Module
     protected $library;
 
     /**
-     * @param CoreModule $module
+     * @param Module $module
      * @param Library $library
      */
-    public function __construct(CoreModule $module, Library $library)
+    public function __construct(Module $module, Library $library)
     {
         $this->module = $module;
         $this->library = $library;
