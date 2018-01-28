@@ -22,7 +22,7 @@
         </label>
       </div>
       <div class="help-block">
-        <?php echo $this->text('If enabled the module will catch all outcoming emails and send them using own handlers'); ?>
+        <?php echo $this->text('If enabled, then the module will catch all outcoming emails and send them using own handlers'); ?>
       </div>
     </div>
   </div>
