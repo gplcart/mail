@@ -1,13 +1,21 @@
 {
-    "name": "gplcart/mail",
-    "type": "gplcart-module",
-    "description": "Provides an alternative way to send store emails using SMTP protocol",
-    "keywords": ["gplcart", "ecommerce", "shopping cart", "gplcart module", "php", "smtp", "phpmailer"],
-    "license": "GPL-3.0+",
-    "require": {
-        "gplcart/composer-module-installer": "*",
-        "phpmailer/phpmailer": "5.2.23"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "gplcart/mail",
+  "type": "gplcart-module",
+  "description": "Provides an alternative way to send store emails using SMTP protocol",
+  "keywords": [
+    "gplcart",
+    "ecommerce",
+    "shopping cart",
+    "gplcart module",
+    "php",
+    "smtp",
+    "phpmailer"
+  ],
+  "license": "GPL-3.0-or-later",
+  "require": {
+    "gplcart/composer-module-installer": "*",
+    "phpmailer/phpmailer": "5.2.23"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
