@@ -49,8 +49,8 @@ class Main
     public function hookLibraryList(array &$libraries)
     {
         $libraries['phpmailer'] = array(
-            'name' => /* @text */'PHP Mail',
-            'description' => /* @text */'The classic email sending library for PHP',
+            'name' => 'PHP Mail', // @text
+            'description' => 'The classic email sending library for PHP', // @text
             'url' => 'https://github.com/PHPMailer/PHPMailer',
             'download' => 'https://github.com/PHPMailer/PHPMailer/archive/v5.2.23.zip',
             'type' => 'php',
