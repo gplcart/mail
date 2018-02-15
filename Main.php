@@ -10,9 +10,10 @@
 namespace gplcart\modules\mail;
 
 use Exception;
-use gplcart\core\Library,
-    gplcart\core\Module;
-use gplcart\core\exceptions\Dependency as DependencyException;
+use gplcart\core\Library;
+use gplcart\core\Module;
+use LogicException;
+use PHPMailer;
 
 /**
  * Main class for Mail module
@@ -181,18 +182,18 @@ class Main
 
     /**
      * Returns PHPMailer instance
-     * @return \PHPMailer
-     * @throws DependencyException
+     * @return PHPMailer
+     * @throws LogicException
      */
     public function getMailer()
     {
         $this->library->load('phpmailer');
 
         if (class_exists('PHPMailer')) {
-            return new \PHPMailer;
+            return new PHPMailer;
         }
 
-        throw new DependencyException('Class \PHPMailer not found');
+        throw new LogicException('Class \PHPMailer not found');
     }
 
     /**
