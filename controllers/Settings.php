@@ -9,21 +9,13 @@
 
 namespace gplcart\modules\mail\controllers;
 
-use gplcart\core\controllers\backend\Controller as BackendController;
+use gplcart\core\controllers\backend\Controller;
 
 /**
  * Handles incoming requests and outputs data related to Mail module
  */
-class Settings extends BackendController
+class Settings extends Controller
 {
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Route page callback to display the module settings page
@@ -48,7 +40,7 @@ class Settings extends BackendController
         $smtp_host = $this->getData('settings.host');
 
         if (is_array($smtp_host)) {
-            $this->setData('settings.host', implode("\n", (array) $smtp_host));
+            $this->setData('settings.host', implode(PHP_EOL, (array) $smtp_host));
         }
     }
 

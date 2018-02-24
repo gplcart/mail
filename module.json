@@ -1,20 +1,20 @@
 {
-    "name": "Mail",
-    "version": "1.0.0-dev",
-    "description": "Provides a better way to send store emails. Based on the PHPMailer library",
-    "author": "Iurii Makukh ",
-    "core": "1.x",
-    "license": "GPL-3.0+",
-    "configure": "admin/module/settings/mail",
-    "settings": {
-        "status": false,
-        "auth": true,
-        "secure": "tls",
-        "host": [
-            "smtp.gmail.com"
-        ],
-        "user": "",
-        "password": "",
-        "port": 587
-    }
+  "name": "Mail",
+  "version": "1.0.0-dev",
+  "description": "Provides a better way to send store emails. Based on the PHPMailer library",
+  "author": "Iurii Makukh ",
+  "core": "1.x",
+  "license": "GPL-3.0+",
+  "configure": "admin/module/settings/mail",
+  "settings": {
+    "status": false,
+    "auth": true,
+    "secure": "tls",
+    "host": [
+      "smtp.gmail.com"
+    ],
+    "user": "",
+    "password": "",
+    "port": 587
+  }
 }
