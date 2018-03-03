@@ -61,9 +61,7 @@ class Main
                 'file' => 'vendor/phpmailer/phpmailer/class.phpmailer.php'
             ),
             'module' => 'mail',
-            'files' => array(
-                'vendor/autoload.php'
-            )
+            'files' => array(GC_FILE_AUTOLOAD)
         );
     }
 
