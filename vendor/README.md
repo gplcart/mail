@@ -1,2 +1,2 @@
-This folder MUST contain 3-d party libraries required by this module. It MUST contain `autoload.php` used for loading all the required classes.
+This folder MUST contain 3-d party libraries required by this module. It MUST contain `autoload.php` that is used for loading all the required classes.
 Use [Composer](https://getcomposer.org) and command `composer install` (from the module root directory) to download all the dependencies and create the `autoload.php`
