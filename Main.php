@@ -89,38 +89,6 @@ class Main
     }
 
     /**
-     * Implements hook "module.enable.after"
-     */
-    public function hookModuleEnableAfter()
-    {
-        $this->library->clearCache();
-    }
-
-    /**
-     * Implements hook "module.disable.after"
-     */
-    public function hookModuleDisableAfter()
-    {
-        $this->library->clearCache();
-    }
-
-    /**
-     * Implements hook "module.install.after"
-     */
-    public function hookModuleInstallAfter()
-    {
-        $this->library->clearCache();
-    }
-
-    /**
-     * Implements hook "module.uninstall.after"
-     */
-    public function hookModuleUninstallAfter()
-    {
-        $this->library->clearCache();
-    }
-
-    /**
      * Send an E-mail
      * @param array $to
      * @param string $subject
