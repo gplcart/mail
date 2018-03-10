@@ -55,13 +55,9 @@ class Main
             'url' => 'https://github.com/PHPMailer/PHPMailer',
             'download' => 'https://github.com/PHPMailer/PHPMailer/archive/v5.2.23.zip',
             'type' => 'php',
-            'version_source' => array(
-                'lines' => 100,
-                'pattern' => '/.*\\$Version.*(\\d+\\.+\\d+\\.+\\d+)/',
-                'file' => 'vendor/phpmailer/phpmailer/class.phpmailer.php'
-            ),
-            'module' => 'mail',
-            'files' => array(GC_FILE_AUTOLOAD)
+            'vendor' => 'phpmailer/phpmailer',
+            'version' => '5.2.23',
+            'module' => 'mail'
         );
     }
 
