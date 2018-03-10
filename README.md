@@ -5,19 +5,8 @@ Mail is a [GPL Cart](https://github.com/gplcart/gplcart) module that offers more
 
 **Installation**
 
-This module contains 3-d party files which should be downloaded separately. You must use [Composer](https://getcomposer.org) to download all the required dependencies and create a class autoloader file.
+This module requires 3-d party library which should be downloaded separately. You have to use [Composer](https://getcomposer.org) to download all the dependencies.
 
-*Download manually:*
-
-1. Download and extract the archive to `system/modules`.
-2. Remove branch/version from the module folder name
-3. `cd` to the module directory and install dependencies: `composer install`
-
-*or using Composer:*
-
-1. `cd` to webroot directory (i.e where is `index.php`) then `composer require gplcart/mail`
-
-*Once all files in place:*
-
-1. Go to `admin/module/list` end enable the module
-2. Enter SMTP server details and enable the module on `admin/module/settings/mail`
+1. From your web root directory: `composer require gplcart/mail`. If the module was downloaded and placed into `system/modules` manually, run `composer update` to make sure that all 3-d party files are presented in the `vendor` directory.
+2. Go to `admin/module/list` end enable the module
+3. Enter SMTP server details and enable the module on `admin/module/settings/mail`
